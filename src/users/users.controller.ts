@@ -11,14 +11,10 @@ export class UsersController {
   @Post('users')
   @UseFilters(MongoExceptionFilter)
   async create(@Body() createUserDto: CreateUserDto, @Res() res: any) {
-    const user = await this.userService.create(createUserDto);
+    await this.userService.create(createUserDto);
     return res.status(HttpStatus.OK).json({
       error: false,
-      message: 'User has been created successfully',
-      user: {
-        name: user.name,
-        email: user.email
-      }
+      message: 'User has been created successfully'
     });
   }
 

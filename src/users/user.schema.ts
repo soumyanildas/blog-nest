@@ -6,27 +6,54 @@ export const UserSchemaProvider = {
   name: 'User',
   useFactory: () => {
     const UserSchema = new mongoose.Schema({
+
       name: {
         type: String,
         required: true
       },
+
+      userName: {
+        type: String,
+        unique: true,
+        required: true
+      },
+
       email: {
         type: String,
-        required: true,
-        unique: true
+        lowercase: true,
+        unique: true,
+        required: true
       },
+
+      profilePic: { // img url
+        type: String,
+      },
+
       password: {
         type: String,
         required: true
       },
-      createdAt: {
+
+      userType: {
         type: String,
-        default: new Date().toISOString()
+        default: "User",
+        enum: ["User", "Admin"]
       },
-      updatedAt: {
-        type: String,
-        default: new Date().toISOString()
-      }
+    
+      isActive: {
+        type: Boolean,
+        default: false
+      },
+    
+      createdAt: {
+        type: Date,
+        default: Date.now
+      },
+    
+      lastUpdatedAt: {
+        type: Date,
+        default: Date.now
+      },
     });
 
     UserSchema.pre('save', function (next: any) {

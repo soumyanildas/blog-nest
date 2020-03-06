@@ -16,11 +16,20 @@ export class AuthService {
     if (userRespone) {
       const isPasswordValid = await bcrypt.compare(user.password, userRespone.password);
       if (isPasswordValid) {
-        const payload = { email: userRespone.email, name: userRespone.name };
+        const payload = {
+          email: userRespone.email,
+          name: userRespone.name,
+          userName: userRespone.userName,
+          profilePic: userRespone.profilePic,
+          isActive: userRespone.isActive
+        };
         return {
           accessToken: this.jwtService.sign(payload),
           email: userRespone.email,
-          name: userRespone.name
+          name: userRespone.name,
+          userName: userRespone.userName,
+          profilePic: userRespone.profilePic,
+          isActive: userRespone.isActive
         };
       }
       return false;

@@ -17,9 +17,14 @@ export class UsersService {
   }
 
   async find(email: string): Promise<User> {
-    const user = await this.userModel.findOne({
-      email
-    }).exec();
+    const user = await this.userModel
+      .findOne({
+        email
+      })
+      .select('-password')
+      .exec();
     return user;
   }
+
+
 }
