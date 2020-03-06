@@ -2,7 +2,7 @@ import { Controller, Post, Body, Res, HttpStatus, UseFilters, Put, UseGuards, Ge
 import { UsersService } from './users.service';
 import { CreateUserDto } from './create-user.dto';
 import { MongoExceptionFilter } from 'src/filters/mongo-exception/mongo-exception.filter';
-import { EditUserDto } from './edit-user.dto copy';
+import { EditUserDto } from './edit-user.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthUser } from './user.decorator';
 
