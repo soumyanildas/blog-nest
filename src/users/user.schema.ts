@@ -39,22 +39,12 @@ export const UserSchemaProvider = {
         default: "User",
         enum: ["User", "Admin"]
       },
-    
+
       isActive: {
         type: Boolean,
         default: false
       },
-    
-      createdAt: {
-        type: Date,
-        default: Date.now
-      },
-    
-      lastUpdatedAt: {
-        type: Date,
-        default: Date.now
-      },
-    });
+    }, { timestamps: true });
 
     UserSchema.pre('save', function (next: any) {
       // eslint-disable-next-line @typescript-eslint/no-this-alias
