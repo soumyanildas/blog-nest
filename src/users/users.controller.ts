@@ -24,15 +24,15 @@ export class UsersController {
   @Put('user')
   @UseFilters(MongoExceptionFilter)
   @UseGuards(AuthGuard('jwt'))
-  async update(@Body() editUserDto: EditUserDto, @Res() res: any, @AuthUser() user: any) {
-    const userResponse = await this.userService.update(editUserDto, user._id);
+  async edit(@Body() editUserDto: EditUserDto, @Res() res: any, @AuthUser() user: any) {
+    const userResponse = await this.userService.edit(editUserDto, user._id);
     if (userResponse) {
       return res.status(HttpStatus.OK).json({
         error: false,
         message: 'User successfully updated'
       });
     }
-    return res.status(HttpStatus.UNAUTHORIZED).json({
+    return res.status(HttpStatus.NOT_FOUND).json({
       error: true,
       message: 'User not found'
     });
@@ -42,7 +42,6 @@ export class UsersController {
   @UseFilters(MongoExceptionFilter)
   @UseGuards(AuthGuard('jwt'))
   async get(@Res() res: any, @AuthUser() user: any) {
-    console.log('UsersController -> get -> user._id', user);
     const userResponse = await this.userService.get(user._id);
     if (userResponse) {
       return res.status(HttpStatus.OK).json({

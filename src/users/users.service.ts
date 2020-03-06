@@ -13,8 +13,10 @@ export class UsersService {
   ) { }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const createUser = new this.userModel(createUserDto);
-    return createUser.save();
+    const createUser = new this
+      .userModel(createUserDto)
+      .save();
+    return createUser;
   }
 
   async find(email: string): Promise<User> {
@@ -34,8 +36,9 @@ export class UsersService {
     return user;
   }
 
-  async update(editUserDto: EditUserDto, id: string): Promise<User> {
-    const user = await this.userModel.findByIdAndUpdate(id, editUserDto);
+  async edit(editUserDto: EditUserDto, id: string): Promise<User> {
+    const user = await this.userModel
+      .findByIdAndUpdate(id, editUserDto, { new: true });
     return user;
   }
 
